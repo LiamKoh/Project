@@ -19,11 +19,19 @@ def get_nta_codes(lons_lats,geo):
 
     return nta_codes
 
-def add_nta_codes(taxi_data,geo):
+def add_pickup_nta_codes(taxi_data,geo):
 
     lons_lats = taxi_data.loc[:,['pickup_longitude','pickup_latitude']].as_matrix()
     nta_codes = get_nta_codes(lons_lats,geo)
-    taxi_data.loc[:,'NTA_code'] = pd.Series(nta_codes,index=taxi_data.index)
+    taxi_data.loc[:,'pickup_NTA_code'] = pd.Series(nta_codes,index=taxi_data.index)
+
+    return None
+
+def add_dropoff_nta_codes(taxi_data,geo):
+
+    lons_lats = taxi_data.loc[:,['dropoff_longitude','dropoff_latitude']].as_matrix()
+    nta_codes = get_nta_codes(lons_lats,geo)
+    taxi_data.loc[:,'dropoff_NTA_code'] = pd.Series(nta_codes,index=taxi_data.index)
 
     return None
 
