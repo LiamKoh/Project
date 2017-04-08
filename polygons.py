@@ -12,7 +12,7 @@ def get_nta_codes(lons_lats,geo):
     for nta_code in geo:
 
         pts = geo[nta_code].dropna().values
-        pts = pts.reshape((pts.shape[0]/2,2))
+        pts = pts.reshape((int(pts.shape[0]/2),2))
         nta_Path = mplPath.Path(pts)
         is_in_nta = nta_Path.contains_points(lons_lats)
         nta_codes[is_in_nta] = nta_code
